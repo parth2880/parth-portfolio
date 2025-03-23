@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fira_Code } from "next/font/google";
 import "./globals.css";
-import Header from "./components/header";
+import Header from "./components/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const firaCode = Fira_Code({
+  variable: "--font-fira-code", // Store the font in a CSS variable
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"], // Specify available weights
 });
 
 export const metadata: Metadata = {
@@ -20,16 +16,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{ 
+}: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Header />
-        {children}
+      <body className={`${firaCode.variable} antialiased`}>
+        <div className="max-w-screen-xl mx-auto bg-background min-h-screen">
+          <Header />
+          {children}
+        </div>
       </body>
     </html>
   );
