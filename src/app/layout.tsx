@@ -3,7 +3,6 @@ import { Fira_Code } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Button from "./components/Button";
-
 const firaCode = Fira_Code({
   variable: "--font-fira-code", // Store the font in a CSS variable
   subsets: ["latin"],
