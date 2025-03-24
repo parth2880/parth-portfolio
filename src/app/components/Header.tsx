@@ -1,6 +1,5 @@
 // components/Header.tsx
 'use client'; // Add this line to indicate this is a client component
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'; // Use this instead of useRouter
 
