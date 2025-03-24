@@ -23,7 +23,6 @@ const Header: React.FC = () => {
     <header className="w-full py-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <Image src="/icons/site-logo.svg" alt="logo" width={16} height={16} />
           <span className="font-semibold">Parth</span>
         </div>
         
