@@ -4,12 +4,13 @@
   --background: #ffffff;
   --foreground: #171717;
   --foreground-secondary: #ABB2BF;
-  --primry: #c778dd;
+  --primary: #c778dd;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground); 
+  --color-primary: var(--primary);
 }
 
 @media (prefers-color-scheme: dark) {

@@ -4,9 +4,9 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 const firaCode = Fira_Code({
-  variable: "--font-fira-code", // Store the font in a CSS variable
+  variable: "--font-fira-code", 
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"], // Specify available weights
+  weight: ["300", "400", "500", "600", "700"], 
 });
 
 export const metadata: Metadata = {
