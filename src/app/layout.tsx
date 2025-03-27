@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${firaCode.variable} antialiased`}>
-        <div className="max-w-screen-xl mx-auto bg-background min-h-screen">
+        <div className="max-w-screen-lg mx-auto bg-background min-h-screen">
           <div className="h-[--header-height] [--header-height:56px]">
             <Header />
           </div>

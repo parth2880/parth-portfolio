@@ -1,9 +1,11 @@
-import Button from "./components/Button";
+import Hero from "./components/Hero";
+import Title from "./components/Title";
 
 export default function Home() {
   return (
-    <div>
-     <Button />
-    </div>
+    <>
+      <Hero />
+      <Title>projects</Title>
+    </>
   );
 }
