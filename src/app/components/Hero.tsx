@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
         <Button>Contact me !!</Button>
       </div>
 
-      <div className="relative block shrink-0 ml-4">
+      <div className="relative block shrink-0">
         <Image
           src="/icons/structure1.svg"
           alt="structure"
