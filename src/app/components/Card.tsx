@@ -1,6 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 import Button from "./Button";
+import Link from "next/link";
 
 type Props = {
   children?: React.ReactNode;
@@ -12,6 +13,8 @@ type Props = {
   bodyClass?: string;
   footerClass?: string;
   imgUrl?: string;
+  primaryLink?: string;
+  secondaryLink?: string;
 };
 
 const Card: React.FC<Props> = ({
@@ -24,6 +27,8 @@ const Card: React.FC<Props> = ({
   bodyClass,
   footerClass,
   imgUrl,
+  primaryLink,
+  secondaryLink,
 }) => {
   return (
     <div
@@ -45,7 +50,10 @@ const Card: React.FC<Props> = ({
             )}
           </div>
           <div
-            className={twMerge("flex flex-col gap-4 text-secondary p-4", bodyClass)}
+            className={twMerge(
+              "flex flex-col gap-4 text-secondary p-4",
+              bodyClass
+            )}
           >
             {body ?? <p>Default body content</p>}
           </div>
@@ -57,8 +65,22 @@ const Card: React.FC<Props> = ({
           >
             {footer ?? (
               <>
-                <Button>View Project</Button>
-                <Button>Github</Button>
+                {primaryLink && (
+                  <Link
+                    target="_blank"
+                    href={primaryLink || "https://toolstation.nl/"}
+                  >
+                    <Button>View Project</Button>
+                  </Link>
+                )}
+                {secondaryLink && (
+                  <Link
+                    target="_blank"
+                    href={secondaryLink || "https://github.com/parth-2880"}
+                  >
+                    <Button>Github</Button>
+                  </Link>
+                )}
               </>
             )}
           </div>

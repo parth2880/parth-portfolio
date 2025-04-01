@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Title from "./components/Title";
 import Card from "./components/Card";
 import Button from "./components/Button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -32,9 +33,13 @@ export default function Home() {
       </div>
       <Title className="mt-36 mb-12">projects</Title>
       <div className="grid grid-cols-3 gap-4 mb-28">
-        <Card body={<>Minecraft servers hosting </>} />
-        <Card body={<>Minecraft servers hosting </>} />
-        <Card body={<>Minecraft servers hosting </>} />
+        <Card body={<>Toolstation</>} primaryLink="https://toolstation.nl/" />
+        <Card
+          body={<>Vaah.dev</>}
+          primaryLink="https://vaah.dev/store/"
+          secondaryLink="https://github.com/parth-2880/vaah-store"
+        />
+        <Card body={<>Webreinvent</>} primaryLink="https://webreinvent.com/" />
       </div>
 
       <Title className="mb-12">skills</Title>
@@ -136,11 +141,28 @@ export default function Home() {
           <Button>Read more !!</Button>
         </div>
         <div>
-          <Image src="/images/parth-hero.png" alt="" width={457} height={386} className="ml-auto" />
+          <Image
+            src="/images/parth-hero.png"
+            alt=""
+            width={457}
+            height={386}
+            className="ml-auto"
+          />
         </div>
       </div>
 
-      <Title>contacts</Title>
+      <Title className="mt-28 mb-12">contacts</Title>
+      <div className="flex justify-between">
+        <p className="max-w-lg text-secondary">
+          I’m interested in freelance opportunities. However, if you have other
+          request or question, don’t hesitate to contact me
+        </p>
+
+        <div className="p-2 border border-secondary mb-40">
+          <p>Message me here!</p>
+          <p className="text-secondary">pathinteract@gmail.com</p>
+        </div>
+      </div>
     </>
   );
 }
