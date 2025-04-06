@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
     <div className="relative text-white flex flex-col md:flex-row items-center gap-4.5">
       <div>
         <h1 className="text-2xl md:text-[32px] font-semibold mb-4 md:mb-8 leading-normal tracking-wide">
-          <span className="">I'm a</span>
+          <span className="">I&apos;m a</span>
           <span className="text-purple-400"> web designer </span> and
           <span className="text-purple-400"> front-end developer</span>
         </h1>
