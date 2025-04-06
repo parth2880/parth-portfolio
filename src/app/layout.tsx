@@ -3,6 +3,8 @@ import { Fira_Code } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+
+
 const firaCode = Fira_Code({
   variable: "--font-fira-code", 
   subsets: ["latin"],
@@ -20,9 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="smooth-scroll">
       <body className={`${firaCode.variable} antialiased`}>
-        <div className="max-w-screen-lg mx-auto bg-background min-h-screen">
+        <div className="max-w-screen-lg mx-auto bg-background min-h-screen px-4">
           <div className="h-[--header-height] [--header-height:56px]">
             <Header />
           </div>

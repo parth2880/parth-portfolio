@@ -5,9 +5,10 @@ import { twMerge } from "tailwind-merge";
 type Props = {
   children?: React.ReactNode;
   className?: string;
+  id?: string;
 };
 
-const Title: React.FC<Props> = ({ children, className }) => {
+const Title: React.FC<Props> = ({ children, className, id }) => {
   return (
     <h2
       className={twMerge(
@@ -16,7 +17,7 @@ const Title: React.FC<Props> = ({ children, className }) => {
       )}
     >
       <span className="text-primary font-semibold"> # </span>
-      <span className="min-w-max"> {children || "title"}</span>
+      <span id={id} className="min-w-max"> {children || "title"}</span>
     </h2>
   );
 };

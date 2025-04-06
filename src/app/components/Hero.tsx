@@ -7,19 +7,19 @@ import Button from "./Button";
 
 const Hero: React.FC = () => {
   return (
-    <div className="relative text-white flex items-center gap-4.5">
+    <div className="relative text-white flex flex-col md:flex-row items-center gap-4.5">
       <div>
-        <h1 className="text-[32px] font-semibold mb-8 leading-normal tracking-wide">
-          <span className="">Parth is a</span>
+        <h1 className="text-2xl md:text-[32px] font-semibold mb-4 md:mb-8 leading-normal tracking-wide">
+          <span className="">I'm a</span>
           <span className="text-purple-400"> web designer </span> and
           <span className="text-purple-400"> front-end developer</span>
         </h1>
 
         <p className="text-secondary mb-6 mr-10">
-          He crafts responsive websites where technologies meet creativity
+          I craft responsive websites where technologies meet creativity
         </p>
 
-        <Button>Contact me !!</Button>
+        <Button to="#contacts">Contact me !!</Button>
       </div>
 
       <div className="relative block shrink-0">
@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
           height={386}
         />
 
-        <div className="absolute -bottom-10.5 left-[48%] -translate-x-1/2 text-secondary bg-background w-[88%] border p-2 flex items-center space-x-2">
+        <div className="absolute -bottom-10.5 left-[50%] -translate-x-1/2 text-secondary bg-background w-full sm:w-[88%] border p-2 flex items-center space-x-2">
           <div className="size-4 bg-primary"></div>
           <span>Currently working on</span>
           <span className="text-purple-400 font-semibold">Portfolio</span>
