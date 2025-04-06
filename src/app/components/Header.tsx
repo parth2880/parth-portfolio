@@ -53,7 +53,7 @@ const Header: React.FC = () => {
   ];
   
   return (
-    <header className="w-full py-4 relative">
+    <header className="w-full py-4 mb-8 relative">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Image src="/icons/site-logo.svg" alt="site logo" width={16} height={16} />

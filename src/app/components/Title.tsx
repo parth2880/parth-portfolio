@@ -12,7 +12,7 @@ const Title: React.FC<Props> = ({ children, className, id }) => {
   return (
     <h2
       className={twMerge(
-        "flex items-center text-[2rem] after:ml-4 after:border after:border-primary after:w-full after:h-px after:content-['']",
+        "flex items-center text-2xl md:text-[2rem] after:ml-4 after:border after:border-primary after:w-full after:h-px after:content-['']",
         className
       )}
     >

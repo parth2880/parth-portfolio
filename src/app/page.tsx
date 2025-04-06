@@ -52,13 +52,15 @@ export default function Home() {
           projects
         </Title>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mb-16 md:mb-28 place-content-center">
-          <Card className="w-full" body={<>Toolstation</>} primaryLink="https://toolstation.nl/" />
+          <Card imgUrl="/images/ts.webp" className="w-full" body={<>Toolstation</>} primaryLink="https://toolstation.nl/" />
           <Card
+          imgUrl="/images/vaah.webp" 
             body={<>Vaah.dev</>}
             primaryLink="https://vaah.dev/store/"
             secondaryLink="https://github.com/parth-2880/vaah-store"
           />
           <Card
+          imgUrl="/images/webreinvent.webp" 
             body={<>Webreinvent</>}
             primaryLink="https://webreinvent.com/"
           />
@@ -159,7 +161,7 @@ export default function Home() {
             <p className="mb-4">Message me here!</p>
             <p className="text-secondary flex items-center gap-2">
               <Icon icon="mdi:email" width={20} height={20} />
-              pathinteract@gmail.com
+              <a href="mailto:parthinteract@gmail.com">parthinteract@gmail.com</a>
             </p>
             <p className="text-secondary flex items-center gap-2">
               <Icon icon="mdi:phone" width={20} height={20} />

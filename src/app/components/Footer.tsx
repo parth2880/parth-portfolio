@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
       icon: "mdi:linkedin",
       href: "https://www.linkedin.com/in/parthsharma2880/",
     },
-    { icon: "mdi:discord", href: "https://discord.com/users/yourusername" },
+    { icon: "mdi:phone", href: "tel:+91-7876800210" },
     { icon: "mdi:email", href: "mailto:parthinteract@gmail.com" },
   ];
 

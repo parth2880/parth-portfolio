@@ -46,6 +46,7 @@ const Card: React.FC<Props> = ({
                 alt="Project"
                 width={330}
                 height={201}
+                className="max-h-[200px]"
               />
             )}
           </div>
