@@ -13,10 +13,17 @@ type Skill = {
 export default function Home() {
   const skills: Skill[] = [
     { title: "Languages", name: ["Javascript", "Typescript"] },
-    { title: "Frameworks", name: ["Next.js", "React", "TailwindCSS"] },
-    { title: "Databases", name: ["MongoDB", "MySQL"] },
-    { title: "Tools", name: ["Figma", "Adobe XD", "FigJam"] },
+    {
+      title: "Frameworks",
+      name: ["Nuxt.js", "Vue.js", "Next.js", "React", "TailwindCSS"],
+    },
+    { title: "Databases", name: ["Node.js", "MySQL"] },
+    {
+      title: "Tools",
+      name: ["Figma", "VS Code", "PhpStorm", "GitKraken", "Canva"],
+    },
     { title: "Cloud", name: ["Vercel", "Netlify"] },
+    { title: "Version Control", name: ["Git"] },
   ];
   return (
     <>
@@ -52,16 +59,42 @@ export default function Home() {
           projects
         </Title>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mb-16 md:mb-28 place-content-center">
-          <Card imgUrl="/images/ts.webp" className="w-full" body={<>Toolstation</>} primaryLink="https://toolstation.nl/" />
           <Card
-          imgUrl="/images/vaah.webp" 
-            body={<>Vaah.dev</>}
+            imgUrl="/images/ts.webp"
+            className="w-full"
+            body={
+              <>
+                {" "}
+                <h3>Toolstation.nl - 10% Sales Growth</h3>Developed responsive
+                UI components and implemented pixel-perfect designs for the
+                Toolstation project.{" "}
+              </>
+            }
+            primaryLink="https://toolstation.nl/"
+          />
+          <Card
+            imgUrl="/images/vaah.webp"
+            body={
+              <>
+                {" "}
+                <h3>Vaah.dev - 100% Lighthouse Score</h3>Built and maintained
+                modern, responsive UI components for various modules on the
+                vaahh.dev platform.{" "}
+              </>
+            }
             primaryLink="https://vaah.dev/store/"
             secondaryLink="https://github.com/parth-2880/vaah-store"
           />
           <Card
-          imgUrl="/images/webreinvent.webp" 
-            body={<>Webreinvent</>}
+            imgUrl="/images/webreinvent.webp"
+            body={
+              <>
+                {" "}
+                <h3>Webreinvent.com - Upgaded to Nuxt3</h3>Implemented modern,
+                responsive UI for the WRI site, focusing on performance and
+                visual consistency.
+              </>
+            }
             primaryLink="https://webreinvent.com/"
           />
         </div>
@@ -100,7 +133,10 @@ export default function Home() {
           </div>
           <div className="columns-2 md:columns-3 gap-4 md:gap-8 md:w-[55%]">
             {skills.map((item) => (
-              <Card key={item.title} className="inline-block flex-col max-w-44 mb-4 last:mb-0">
+              <Card
+                key={item.title}
+                className="inline-block flex-col max-w-44 mb-4 last:mb-0"
+              >
                 <p className="p-2 border-b">{item.title}</p>
                 <div className="text-secondary p-2 flex flex-wrap gap-2">
                   {item.name.map((name) => (
@@ -134,13 +170,13 @@ export default function Home() {
             </p>
             <Button>Read more !!</Button>
           </div>
-          <div>
+          <div className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:max-w-[400px] after:ml-auto after:border-b after:border-primary">
             <Image
               src="/images/parth-hero.png"
               alt=""
-              width={457}
-              height={386}
-              className="ml-auto"
+              width={400}
+              height={400}
+              className=""
             />
           </div>
         </div>
@@ -151,17 +187,19 @@ export default function Home() {
         <Title id="contacts" className="mt-28 mb-12">
           contacts
         </Title>
-        <div className="flex flex-col md:flex-row justify-between gap-6">
+        <div className="flex flex-col md:flex-row justify-between gap-6 mb-20 md:mb-40 ">
           <p className="max-w-lg text-secondary">
             I’m interested in freelance opportunities. However, if you have
             other request or question, don’t hesitate to contact me
           </p>
 
-          <div className="p-4 border border-secondary mb-20 md:mb-40 max-w-max space-y-4">
+          <div className="p-4 border border-secondary max-w-max space-y-4">
             <p className="mb-4">Message me here!</p>
             <p className="text-secondary flex items-center gap-2">
               <Icon icon="mdi:email" width={20} height={20} />
-              <a href="mailto:parthinteract@gmail.com">parthinteract@gmail.com</a>
+              <a href="mailto:parthinteract@gmail.com">
+                parthinteract@gmail.com
+              </a>
             </p>
             <p className="text-secondary flex items-center gap-2">
               <Icon icon="mdi:phone" width={20} height={20} />

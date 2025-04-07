@@ -33,12 +33,12 @@ const Hero: React.FC = () => {
         <Image
           src="/images/parth-hero.png"
           alt="Elias - Web Designer and Front-end Developer"
-          className="z-10 relative"
+          className="z-10 relative "
           width={457}
           height={386}
         />
 
-        <div className="absolute -bottom-10.5 left-[50%] -translate-x-1/2 text-secondary bg-background w-full sm:w-[88%] border p-2 flex items-center space-x-2">
+        <div className="absolute -bottom-10.5 left-[50%] -translate-x-1/2 text-secondary bg-background w-full sm:w-full border p-2 flex items-center space-x-2">
           <div className="size-4 bg-primary"></div>
           <span>Currently working on</span>
           <span className="text-purple-400 font-semibold">Portfolio</span>
