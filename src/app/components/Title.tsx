@@ -1,36 +1,18 @@
-"use client";
+import React from "react";
 
-import { twMerge } from "tailwind-merge";
-
-type Props = {
-  children?: React.ReactNode;
+interface TitleProps {
+  children: React.ReactNode;
   className?: string;
-  id?: string;
-};
+}
 
-const Title: React.FC<Props> = ({ children, className, id }) => {
+const Title: React.FC<TitleProps> = ({ children, className = "" }) => {
   return (
-    <h2
-      className={twMerge(
-        "flex items-center text-2xl md:text-[2rem] lg:text-3xl after:ml-4 after:border after:border-primary after:w-full after:h-px after:content-[''] relative group hover-scale scroll-animate",
-        className
-      )}
-    >
-      <span
-        className="text-primary font-semibold hover:scale-110 hover:rotate-6 transition-transform duration-200"
-      >
-        #
-      </span>
-      <span
-        id={id}
-        className="min-w-max ml-2 hover:text-primary transition-colors duration-200"
-      >
-        {children || "title"}
-      </span>
-
-      {/* Animated underline */}
-      <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-purple-400 w-0 group-hover:w-full transition-all duration-800 ease-out" />
-    </h2>
+    <div className={`text-center ${className}`}>
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4 scroll-animate">
+        {children}
+      </h2>
+      <div className="w-16 sm:w-20 lg:w-24 h-0.5 sm:h-1 bg-primary rounded-full mx-auto scroll-animate" style={{ animationDelay: '0.1s' }} />
+    </div>
   );
 };
 

@@ -1,312 +1,198 @@
 "use client";
 
-import Image from "next/image";
+import React, { useEffect } from "react";
 import Hero from "./components/Hero";
+import ProjectCard from "./components/ProjectCard";
 import Title from "./components/Title";
-import Card from "./components/Card";
-import Button from "./components/Button";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { Quote, Mail, Phone, ArrowRight, Star } from "lucide-react";
-import ScrollToTop from "./components/ScrollToTop";
-import { useEffect } from "react";
+import ContactForm from "./components/ContactForm";
 import { initScrollAnimations } from "./utils/scrollAnimations";
-
-type Skill = {
-  title: string;
-  name: string[];
-};
+import {
+  Code,
+  Palette,
+  Smartphone,
+  Globe,
+  Database,
+  Zap,
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Instagram
+} from "lucide-react";
 
 export default function Home() {
-  const skills: Skill[] = [
-    { title: "Languages", name: ["Javascript", "Typescript"] },
-    {
-      title: "Frameworks",
-      name: ["Nuxt.js", "Vue.js", "Next.js", "React", "TailwindCSS"],
-    },
-    { title: "Databases", name: ["Node.js", "MySQL"] },
-    {
-      title: "Tools",
-      name: ["Figma", "VS Code", "PhpStorm", "GitKraken", "Canva"],
-    },
-    { title: "Cloud", name: ["Vercel", "Netlify"] },
-    { title: "Version Control", name: ["Git"] },
-  ];
-
   useEffect(() => {
+    // Initialize scroll animations
     const observer = initScrollAnimations();
+
+    // Fallback: Make sure cards are visible after a delay
+    const fallbackTimer = setTimeout(() => {
+      const cards = document.querySelectorAll('.scroll-animate');
+      cards.forEach(card => {
+        if (!card.classList.contains('animate')) {
+          card.classList.add('animate');
+        }
+      });
+    }, 2000);
+
     return () => {
       if (observer) {
         observer.disconnect();
       }
+      clearTimeout(fallbackTimer);
     };
   }, []);
 
+  const projects = [
+    {
+      title: "Toolstation.nl",
+      description: "Developed responsive UI components and implemented pixel-perfect designs for the Toolstation project with focus on performance and user experience. Achieved 10% sales growth through improved user interface.",
+      image: "/images/ts.webp",
+      liveUrl: "https://toolstation.nl/",
+      tags: ["Responsive Design", "UI Components", "Performance", "User Experience"]
+    },
+    {
+      title: "Vaah.dev",
+      description: "Built and maintained modern, responsive UI components for various modules on the vaahh.dev platform with exceptional performance metrics. Achieved 100% Lighthouse score.",
+      image: "/images/vaah.webp",
+      liveUrl: "https://vaah.dev/store/",
+      githubUrl: "https://github.com/webreinvent/vaahstore",
+      tags: ["React", "UI Components", "Lighthouse", "Performance"]
+    },
+    {
+      title: "Webreinvent.com",
+      description: "Implemented modern, responsive UI for the WRI site, focusing on performance and visual consistency with the latest Nuxt.js framework. Successfully upgraded to Nuxt3.",
+      image: "/images/webreinvent.webp",
+      liveUrl: "https://webreinvent.com/",
+      tags: ["Nuxt.js", "Vue.js", "Responsive Design", "Modern UI"]
+    }
+  ];
+
+  const skills = [
+    { name: "Frontend Development", icon: <Code className="w-5 h-5 sm:w-6 sm:h-6" />, level: 90 },
+    { name: "UI/UX Design", icon: <Palette className="w-5 h-5 sm:w-6 sm:h-6" />, level: 85 },
+    { name: "Responsive Design", icon: <Smartphone className="w-5 h-5 sm:w-6 sm:h-6" />, level: 95 },
+    { name: "Web Development", icon: <Globe className="w-5 h-5 sm:w-6 sm:h-6" />, level: 88 },
+    { name: "Database Design", icon: <Database className="w-5 h-5 sm:w-6 sm:h-6" />, level: 75 },
+    { name: "Performance Optimization", icon: <Zap className="w-5 h-5 sm:w-6 sm:h-6" />, level: 80 }
+  ];
+
+  const contactInfo = [
+    { icon: <Mail className="w-4 h-4 sm:w-5 sm:h-5" />, label: "Email", value: "parthinteract@gmail.com", href: "mailto:parthinteract@gmail.com" },
+    { icon: <Phone className="w-4 h-4 sm:w-5 sm:h-5" />, label: "Phone", value: "+91 7876800210", href: "tel:+917876800210" },
+    { icon: <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />, label: "Location", value: "Kangra, H.P, India", href: "#" }
+  ];
+
+  const socialLinks = [
+    { icon: <Github className="w-4 h-4 sm:w-5 sm:h-5" />, label: "GitHub", href: "https://github.com/parth2880/" },
+    { icon: <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />, label: "LinkedIn", href: "https://www.linkedin.com/in/parthsharma2880/" },
+    { icon: <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />, label: "Instagram", href: "https://www.instagram.com/parthsharma6505/" }
+  ];
+
   return (
-    <>
+    <div className="space-y-20 sm:space-y-24 lg:space-y-32">
+      {/* Hero Section */}
       <Hero />
 
-      {/* quote */}
-      <section className="py-20 scroll-animate">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="relative border border-secondary/30 p-8 md:p-12 rounded-2xl bg-background/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover-scale">
-            <div className="text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed animate-fade-in stagger-1">
-              <span className="animate-gradient-shift font-semibold">
-                "With great power comes great electricity bill"
-              </span>
-            </div>
-
-            <div className="flex items-center justify-end gap-2 mt-6 text-secondary animate-fade-in stagger-2">
-              <Quote className="w-5 h-5" />
-              <span className="text-lg">- Dr. Who</span>
-            </div>
-
-            {/* Floating elements */}
-            <div className="absolute -top-4 -left-4 w-8 h-8 border border-primary/30 rounded-full animate-rotate-slow" />
-            <div className="absolute -bottom-4 -right-4 w-6 h-6 border border-secondary/30 rounded-full animate-rotate-reverse" />
+      {/* Projects Section */}
+      <section id="projects" className="py-12 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Title>Featured Projects</Title>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16">
+            {projects.map((project, index) => (
+              <ProjectCard
+                key={project.title}
+                title={project.title}
+                description={project.description}
+                image={project.image}
+                liveUrl={project.liveUrl}
+                githubUrl={project.githubUrl}
+                tags={project.tags}
+                index={index}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* projects */}
-      <section className="py-20 scroll-animate" id="projects">
-        <div className="max-w-7xl mx-auto px-4">
-          <Title id="projects" className="mb-16 text-center">
-            <span className="animate-fade-in stagger-1">
-              Featured Projects
-            </span>
-          </Title>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="animate-slide-up stagger-1">
-              <Card
-                imgUrl="/images/ts.webp"
-                className="w-full h-full"
-                body={
-                  <>
-                    <div className="flex items-center gap-2 mb-3">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <h3 className="text-lg font-semibold text-white">Toolstation.nl</h3>
-                    </div>
-                    <p className="text-sm text-primary mb-2">10% Sales Growth</p>
-                    <p className="text-secondary text-sm leading-relaxed">
-                      Developed responsive UI components and implemented pixel-perfect designs for the
-                      Toolstation project with focus on performance and user experience.
-                    </p>
-                  </>
-                }
-                primaryLink="https://toolstation.nl/"
-                delay={0.1}
-              />
-            </div>
-
-            <div className="animate-slide-up stagger-2">
-              <Card
-                imgUrl="/images/vaah.webp"
-                className="w-full h-full"
-                body={
-                  <>
-                    <div className="flex items-center gap-2 mb-3">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <h3 className="text-lg font-semibold text-white">Vaah.dev</h3>
-                    </div>
-                    <p className="text-sm text-primary mb-2">100% Lighthouse Score</p>
-                    <p className="text-secondary text-sm leading-relaxed">
-                      Built and maintained modern, responsive UI components for various modules on the
-                      vaahh.dev platform with exceptional performance metrics.
-                    </p>
-                  </>
-                }
-                primaryLink="https://vaah.dev/store/"
-                secondaryLink="https://github.com/parth-2880/vaah-store"
-                delay={0.2}
-              />
-            </div>
-
-            <div className="animate-slide-up stagger-3">
-              <Card
-                imgUrl="/images/webreinvent.webp"
-                className="w-full h-full"
-                body={
-                  <>
-                    <div className="flex items-center gap-2 mb-3">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <h3 className="text-lg font-semibold text-white">Webreinvent.com</h3>
-                    </div>
-                    <p className="text-sm text-primary mb-2">Upgraded to Nuxt3</p>
-                    <p className="text-secondary text-sm leading-relaxed">
-                      Implemented modern, responsive UI for the WRI site, focusing on performance and
-                      visual consistency with the latest Nuxt.js framework.
-                    </p>
-                  </>
-                }
-                primaryLink="https://webreinvent.com/"
-                delay={0.3}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* skills */}
-      <section className="py-20 scroll-animate" id="skills">
-        <div className="max-w-7xl mx-auto px-4">
-          <Title id="skills" className="mb-16 text-center">
-            <span className="animate-fade-in stagger-1">
-              Skills & Technologies
-            </span>
-          </Title>
-
-          <div className="flex flex-col lg:flex-row justify-between gap-12">
-            <div className="hidden lg:block relative w-[35%] animate-slide-in-left">
-              <div className="absolute top-0 left-0 animate-rotate-slow">
-                <Image
-                  src="/icons/dots.svg"
-                  alt=""
-                  width={64}
-                  height={64}
-                />
-              </div>
-
-              <div className="absolute top-1/2 right-0 animate-rotate-reverse">
-                <Image
-                  src="/icons/dots.svg"
-                  alt=""
-                  width={64}
-                  height={64}
-                />
-              </div>
-
-              <div className="absolute bottom-0 left-8 animate-float">
-                <Image
-                  src="/icons/structure1.svg"
-                  alt=""
-                  width={113}
-                  height={113}
-                />
-              </div>
-
-              <div className="border size-22 absolute -top-8 right-8 border-secondary animate-scale-pulse" />
-              <div className="border size-16 absolute bottom-8 right-0 border-secondary animate-scale-pulse" style={{ animationDelay: '1s' }} />
-            </div>
-
-            <div className="columns-1 md:columns-2 lg:columns-3 gap-6 lg:w-[55%]">
-              {skills.map((item, index) => (
-                <div key={item.title} className="animate-slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <Card
-                    className="inline-block flex-col max-w-44 mb-6 last:mb-0 hover:bg-background/80"
-                    delay={index * 0.1}
-                  >
-                    <p className="p-3 border-b border-secondary/20 font-semibold text-white">{item.title}</p>
-                    <div className="text-secondary p-3 flex flex-wrap gap-2">
-                      {item.name.map((name) => (
-                        <span
-                          key={name}
-                          className="text-sm px-2 py-1 bg-secondary/10 rounded-md hover:bg-primary/20 hover:text-primary transition-colors cursor-default hover-scale"
-                        >
-                          {name}
-                        </span>
-                      ))}
-                    </div>
-                  </Card>
+      {/* Skills Section */}
+      <section id="skills" className="py-12 sm:py-16 lg:py-20 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Title>Skills & Expertise</Title>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16">
+            {skills.map((skill, index) => (
+              <div
+                key={skill.name}
+                className="bg-card border border-border rounded-xl p-4 sm:p-6 hover-lift scroll-animate"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                  <div className="p-2 sm:p-3 bg-primary/10 rounded-lg text-primary">
+                    {skill.icon}
+                  </div>
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">{skill.name}</h3>
                 </div>
-              ))}
-            </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs sm:text-sm text-muted-foreground">
+                    <span>Proficiency</span>
+                    <span>{skill.level}%</span>
+                  </div>
+                  <div className="w-full bg-muted rounded-full h-1.5 sm:h-2">
+                    <div
+                      className="bg-primary h-1.5 sm:h-2 rounded-full transition-all duration-1000 ease-out"
+                      style={{ width: `${skill.level}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* about-me */}
-      <section className="py-20 scroll-animate" id="about-me">
-        <div className="max-w-7xl mx-auto px-4">
-          <Title id="about-me" className="mb-16 text-center">
-            <span className="animate-fade-in stagger-1">
-              About Me
-            </span>
-          </Title>
-
-          <div className="flex flex-col lg:flex-row justify-between gap-12 items-center">
-            <div className="text-secondary space-y-6 lg:w-1/2 animate-slide-in-left">
-              <p className="text-xl font-semibold text-white animate-fade-in stagger-1">
-                Hello, I'm Parth!
-              </p>
-
-              <p className="leading-relaxed animate-fade-in stagger-2">
-                I'm a self-taught front-end developer based in Kangra, H.P, India.
-                I can develop responsive websites from scratch and raise them into
-                modern user-friendly web experiences.
-              </p>
-
-              <p className="leading-relaxed animate-fade-in stagger-3">
-                Transforming my creativity and knowledge into websites has been
-                my passion for over a year. I have been helping various clients to
-                establish their presence online. I always strive to learn about
-                the newest technologies and frameworks.
-              </p>
-
-              <div className="animate-fade-in stagger-4">
-                <Button variant="outline" size="lg">
-                  Read more <ArrowRight className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-
-            <div className="relative lg:w-1/2 animate-slide-in-right">
-              <div className="relative hover-scale transition-transform duration-300">
-                <Image
-                  src="/images/parth-hero.png"
-                  alt="Parth Sharma"
-                  width={400}
-                  height={400}
-                  className="rounded-2xl"
-                />
-
-                {/* Glowing border effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 to-purple-400/20 blur-xl animate-glow-pulse" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* contacts */}
-      <section className="py-20 scroll-animate" id="contacts">
-        <div className="max-w-7xl mx-auto px-4">
-          <Title id="contacts" className="mb-16 text-center">
-            <span className="animate-fade-in stagger-1">
-              Get In Touch
-            </span>
-          </Title>
-
-          <div className="flex flex-col lg:flex-row justify-between gap-12 items-center">
-            <div className="max-w-lg text-secondary lg:w-1/2 animate-slide-in-left">
-              <p className="text-lg leading-relaxed animate-fade-in stagger-1">
-                I'm interested in freelance opportunities. However, if you have
-                other request or question, don't hesitate to contact me
-              </p>
-            </div>
-
-            <div className="lg:w-1/2 animate-slide-in-right">
-              <div className="p-8 border border-secondary/30 rounded-2xl bg-background/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 max-w-md hover-lift">
-                <p className="mb-6 text-xl font-semibold text-white animate-fade-in stagger-1">
-                  Message me here!
+      {/* About Section */}
+      <section id="about-me" className="py-12 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-4 sm:space-y-6 scroll-animate">
+              <Title>About Me</Title>
+              <div className="space-y-3 sm:space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  I'm a passionate web designer and frontend developer based in Kangra, H.P, India.
+                  With a keen eye for design and a love for clean, efficient code, I create digital
+                  experiences that not only look great but also perform exceptionally.
                 </p>
-
-                <div className="space-y-4 animate-fade-in stagger-2">
-                  <a
-                    href="mailto:parthinteract@gmail.com"
-                    className="text-secondary flex items-center gap-3 hover:text-primary transition-colors hover-scale"
-                  >
-                    <Mail className="w-5 h-5" />
-                    <span>parthinteract@gmail.com</span>
-                  </a>
-
-                  <a
-                    href="tel:+91-7876800210"
-                    className="text-secondary flex items-center gap-3 hover:text-primary transition-colors hover-scale"
-                  >
-                    <Phone className="w-5 h-5" />
-                    <span>+91-7876800210</span>
-                  </a>
+                <p>
+                  My journey in web development started with curiosity and has evolved into a
+                  professional passion. I specialize in creating responsive, user-friendly websites
+                  that combine modern design principles with cutting-edge technologies.
+                </p>
+                <p>
+                  When I'm not coding, you can find me exploring new design trends, contributing
+                  to open-source projects, or sharing knowledge with the developer community.
+                </p>
+              </div>
+            </div>
+            <div className="relative scroll-animate">
+              <div className="bg-gradient-to-br from-primary/10 to-purple-500/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                  <div className="text-center p-3 sm:p-4 bg-card rounded-xl">
+                    <div className="text-xl sm:text-2xl font-bold text-primary">50+</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Projects Completed</div>
+                  </div>
+                  <div className="text-center p-3 sm:p-4 bg-card rounded-xl">
+                    <div className="text-xl sm:text-2xl font-bold text-primary">2+</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Years Experience</div>
+                  </div>
+                  <div className="text-center p-3 sm:p-4 bg-card rounded-xl">
+                    <div className="text-xl sm:text-2xl font-bold text-primary">100%</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Client Satisfaction</div>
+                  </div>
+                  <div className="text-center p-3 sm:p-4 bg-card rounded-xl">
+                    <div className="text-xl sm:text-2xl font-bold text-primary">24/7</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Support Available</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -314,7 +200,63 @@ export default function Home() {
         </div>
       </section>
 
-      <ScrollToTop />
-    </>
+      {/* Contact Section */}
+      <section id="contacts" className="py-12 sm:py-16 lg:py-20 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Title>Get In Touch</Title>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mt-12 sm:mt-16">
+            {/* Contact Info */}
+            <div className="space-y-6 sm:space-y-8 scroll-animate">
+              <div>
+                <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-4 sm:mb-6">Let's work together</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+                </p>
+              </div>
+
+              <div className="space-y-3 sm:space-y-4">
+                {contactInfo.map((contact, index) => (
+                  <a
+                    key={contact.label}
+                    href={contact.href}
+                    className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-card border border-border rounded-lg hover-lift transition-all duration-300"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg text-primary">
+                      {contact.icon}
+                    </div>
+                    <div>
+                      <div className="font-medium text-foreground text-sm sm:text-base">{contact.label}</div>
+                      <div className="text-muted-foreground text-xs sm:text-sm">{contact.value}</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+
+              <div className="pt-2 sm:pt-4">
+                <h4 className="text-base sm:text-lg font-semibold text-foreground mb-3 sm:mb-4">Follow me</h4>
+                <div className="flex gap-3 sm:gap-4">
+                  {socialLinks.map((social, index) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 sm:p-3 bg-card border border-border rounded-lg text-muted-foreground hover:text-primary hover-lift transition-all duration-300"
+                      style={{ animationDelay: `${(index + 3) * 0.1}s` }}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Form */}
+            <ContactForm />
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

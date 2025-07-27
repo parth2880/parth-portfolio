@@ -1,10 +1,10 @@
-// components/Header.tsx
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Menu, X, Code } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
+import Logo from './Logo';
 
 type NavItem = {
   label: string;
@@ -16,136 +16,117 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const handleResize = () => {
-        setIsMobile(window.innerWidth < 768);
-        if (window.innerWidth >= 768) {
-          setIsMenuOpen(false);
-        }
-      };
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
-      const handleScroll = () => {
-        setScrolled(window.scrollY > 50);
-      };
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
 
-      handleResize();
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleScroll);
 
-      window.addEventListener('resize', handleResize);
-      window.addEventListener('scroll', handleScroll);
-
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const handleLinkClick = () => {
-    if (isMobile) {
-      setIsMenuOpen(false);
-    }
+    setIsMenuOpen(false);
   };
 
   const navItems: NavItem[] = [
-    { label: 'home', href: '/' },
-    { label: 'projects', href: '#projects' },
-    { label: 'skills', href: '#skills' },
-    { label: 'about-me', href: '#about-me' },
-    { label: 'contacts', href: '#contacts' },
+    { label: 'Home', href: '/' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'About', href: '#about-me' },
+    { label: 'Contact', href: '#contacts' },
   ];
 
   return (
     <header
-      className={`w-full py-4 fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-slide-up ${scrolled
-        ? 'bg-background/80 backdrop-blur-md border-b border-secondary/20 shadow-lg'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+        ? 'bg-background/80 backdrop-blur-md border-b border-border shadow-sm'
         : 'bg-transparent'
         }`}
     >
-      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-        <div
-          className="flex items-center space-x-3 hover-scale"
-        >
-          <div className="animate-rotate-slow">
-            <Code className="w-6 h-6 text-primary" />
-          </div>
-          <span
-            className="font-bold text-xl animate-gradient-shift hover-scale"
-          >
-            Parth
-          </span>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-3 hover-scale">
+            <Logo size="md" variant="default" />
+          </Link>
 
-        {/* Hamburger icon for mobile */}
-        {isMobile && (
-          <button
-            className="md:hidden focus:outline-none p-2 rounded-lg hover:bg-secondary/10 transition-colors hover-scale"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <div className="relative w-6 h-6">
-              {isMenuOpen ? (
-                <X className="w-6 h-6 absolute inset-0 rotate-0 transition-transform duration-200" />
-              ) : (
-                <Menu className="w-6 h-6 absolute inset-0 rotate-0 transition-transform duration-200" />
-              )}
-            </div>
-          </button>
-        )}
-
-        {/* Desktop navigation */}
-        <nav className={`md:flex items-center space-x-8 ${isMobile ? 'hidden' : 'flex'}`}>
-          {navItems.map((item, index) => (
-            <div
-              key={item.href}
-              className="animate-slide-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
+            {navItems.map((item) => (
               <Link
+                key={item.href}
                 href={item.href}
-                className={`relative group ${pathname === item.href ? 'text-primary' : 'text-secondary hover:text-white'
-                  } transition-colors duration-300`}
+                className={`relative font-medium transition-colors text-sm lg:text-base ${pathname === item.href ? 'text-primary' : 'text-foreground hover:text-primary'
+                  }`}
                 onClick={handleLinkClick}
               >
-                <span
-                  className="mr-1 text-primary hover:scale-110 hover:rotate-6 transition-transform duration-200"
-                >
-                  #
-                </span>
                 {item.label}
-
-                {/* Hover underline */}
-                <div className="absolute -bottom-1 left-0 h-0.5 bg-primary w-0 group-hover:w-full transition-all duration-300" />
+                {pathname === item.href && (
+                  <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full" />
+                )}
               </Link>
-            </div>
-          ))}
-        </nav>
+            ))}
+          </nav>
 
-        {/* Mobile navigation overlay */}
+          {/* Theme Toggle & Mobile Menu */}
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-1.5 sm:p-2 rounded-lg bg-muted hover:bg-accent transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <Moon className="w-4 h-4 sm:w-5 sm:h-5" />
+              ) : (
+                <Sun className="w-4 h-4 sm:w-5 sm:h-5" />
+              )}
+            </button>
+
+            {/* Mobile Menu Button */}
+            {isMobile && (
+              <button
+                className="md:hidden p-1.5 sm:p-2 rounded-lg bg-muted hover:bg-accent transition-colors"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? (
+                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
+                ) : (
+                  <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
+                )}
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
         {isMobile && isMenuOpen && (
-          <div className="fixed inset-0 bg-background/95 backdrop-blur-md z-50 flex flex-col items-center justify-center animate-fade-in">
-            <nav className="flex flex-col items-center space-y-8 animate-slide-up">
-              {navItems.map((item, index) => (
-                <div
+          <div className="md:hidden mt-3 sm:mt-4 pb-3 sm:pb-4 border-t border-border">
+            <nav className="flex flex-col space-y-3 sm:space-y-4 pt-3 sm:pt-4">
+              {navItems.map((item) => (
+                <Link
                   key={item.href}
-                  className="animate-slide-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  href={item.href}
+                  className={`font-medium transition-colors text-sm sm:text-base ${pathname === item.href ? 'text-primary' : 'text-foreground hover:text-primary'
+                    }`}
+                  onClick={handleLinkClick}
                 >
-                  <Link
-                    href={item.href}
-                    className={`text-2xl font-medium ${pathname === item.href ? 'text-primary' : 'text-secondary hover:text-white'
-                      } transition-colors duration-300`}
-                    onClick={handleLinkClick}
-                  >
-                    <span
-                      className="mr-2 text-primary hover:scale-110 hover:rotate-6 transition-transform duration-200"
-                    >
-                      #
-                    </span>
-                    {item.label}
-                  </Link>
-                </div>
+                  {item.label}
+                </Link>
               ))}
             </nav>
           </div>

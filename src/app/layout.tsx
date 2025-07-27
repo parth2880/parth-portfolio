@@ -3,6 +3,8 @@ import { Fira_Code } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { ThemeProvider } from "./components/ThemeProvider";
+import LenisProvider from "./components/LenisProvider";
 
 const firaCode = Fira_Code({
   variable: "--font-fira-code",
@@ -23,13 +25,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="smooth-scroll">
       <body className={`${firaCode.variable} antialiased`}>
-        <div className="bg-background min-h-screen">
-          <Header />
-          <main className="pt-20">
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <LenisProvider>
+          <ThemeProvider>
+            <div className="bg-background min-h-screen">
+              <Header />
+              <main className="pt-20">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </ThemeProvider>
+        </LenisProvider>
       </body>
     </html>
   );
