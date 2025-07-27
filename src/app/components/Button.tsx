@@ -6,24 +6,39 @@ type Props = {
   children?: React.ReactNode;
   className?: string;
   to?: string;
+  variant?: "primary" | "outline" | "ghost";
+  size?: "sm" | "md" | "lg";
 };
 
-// Define a more specific type for props instead of using 'any'
-type ButtonProps = {
-  className: string;
-  href?: string;
-};
-
-const Button: React.FC<Props> = ({ children, className, to }) => {
+const Button: React.FC<Props> = ({
+  children,
+  className,
+  to,
+  variant = "primary",
+  size = "md"
+}) => {
   const Tag = to ? "a" : "button";
 
-  const defaultClass =
-    "flex gap-2 items-center py-2 px-4 border border-primary hover:bg-primary/20 transition-colors duration-200 cursor-pointer max-w-max";
+  const baseClass = "flex gap-2 items-center justify-center font-medium transition-all duration-300 cursor-pointer max-w-max rounded-lg hover-scale";
 
-  const props: ButtonProps = {
+  const variantClasses = {
+    primary: "bg-primary text-white border border-primary hover:bg-primary/90 hover-glow shadow-lg",
+    outline: "bg-transparent text-primary border border-primary hover:bg-primary/10",
+    ghost: "bg-transparent text-secondary border border-secondary/30 hover:bg-secondary/10 hover:border-secondary"
+  };
+
+  const sizeClasses = {
+    sm: "py-1.5 px-3 text-sm",
+    md: "py-2.5 px-6 text-base",
+    lg: "py-3 px-8 text-lg"
+  };
+
+  const defaultClass = `${baseClass} ${variantClasses[variant]} ${sizeClasses[size]}`;
+
+  const props: any = {
     className: `${defaultClass} ${className || ""}`.trim(),
   };
-  
+
   // Add href only if 'to' exists
   if (to) {
     props.href = to;
