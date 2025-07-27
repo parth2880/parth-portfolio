@@ -101,7 +101,7 @@ ${formData.message}
                     <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
                     <div>
                         <p className="text-green-800 font-medium text-sm sm:text-base">Message sent successfully!</p>
-                        <p className="text-green-600 text-xs sm:text-sm">I'll get back to you soon.</p>
+                        <p className="text-green-600 text-xs sm:text-sm">I&apos;ll get back to you soon.</p>
                     </div>
                 </div>
             )}

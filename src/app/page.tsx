@@ -159,7 +159,7 @@ export default function Home() {
               <Title>About Me</Title>
               <div className="space-y-3 sm:space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  I'm a passionate web designer and frontend developer based in Kangra, H.P, India.
+                  I&apos;m a passionate web designer and frontend developer based in Kangra, H.P, India.
                   With a keen eye for design and a love for clean, efficient code, I create digital
                   experiences that not only look great but also perform exceptionally.
                 </p>
@@ -169,7 +169,7 @@ export default function Home() {
                   that combine modern design principles with cutting-edge technologies.
                 </p>
                 <p>
-                  When I'm not coding, you can find me exploring new design trends, contributing
+                  When I&apos;m not coding, you can find me exploring new design trends, contributing
                   to open-source projects, or sharing knowledge with the developer community.
                 </p>
               </div>
@@ -208,9 +208,9 @@ export default function Home() {
             {/* Contact Info */}
             <div className="space-y-6 sm:space-y-8 scroll-animate">
               <div>
-                <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-4 sm:mb-6">Let's work together</h3>
+                <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-4 sm:mb-6">Let&apos;s work together</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+                  I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
                 </p>
               </div>
 

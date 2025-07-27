@@ -35,7 +35,7 @@ const Button: React.FC<Props> = ({
 
   const defaultClass = `${baseClass} ${variantClasses[variant]} ${sizeClasses[size]}`;
 
-  const props: any = {
+  const props: React.HTMLAttributes<HTMLElement> & { href?: string } = {
     className: `${defaultClass} ${className || ""}`.trim(),
   };
 

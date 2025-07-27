@@ -18,7 +18,7 @@ const LenisProvider: React.FC<LenisProviderProps> = ({ children }) => {
         });
 
         // Expose Lenis instance globally for use in other components
-        (window as any).lenis = lenisRef.current;
+        (window as typeof window & { lenis?: Lenis }).lenis = lenisRef.current;
 
         // RAF for smooth scrolling
         function raf(time: number) {
@@ -32,7 +32,7 @@ const LenisProvider: React.FC<LenisProviderProps> = ({ children }) => {
         return () => {
             if (lenisRef.current) {
                 lenisRef.current.destroy();
-                delete (window as any).lenis;
+                delete (window as typeof window & { lenis?: Lenis }).lenis;
             }
         };
     }, []);

@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
   useEffect(() => {
     if (!lenis || !heroRef.current) return;
 
-    const handleScroll = (e: any) => {
+    const handleScroll = (e: { scroll: number }) => {
       const { scroll } = e;
       const heroRect = heroRef.current?.getBoundingClientRect();
 
@@ -97,7 +97,7 @@ const Hero: React.FC = () => {
             {/* Greeting */}
             <div className="space-y-3 sm:space-y-4">
               <p className="text-base sm:text-lg text-muted-foreground animate-fadeIn stagger-1 hover-lift">
-                Hello, I'm
+                Hello, I&apos;m
               </p>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight animate-fadeIn stagger-2">
                 <span className="gradient-text typing-animation">Parth Sharma</span>
@@ -110,7 +110,7 @@ const Hero: React.FC = () => {
             {/* Description */}
             <p className="text-base sm:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed animate-fadeIn stagger-4 hover-lift">
               I craft beautiful, responsive websites that combine modern design with exceptional user experience.
-              Let's bring your ideas to life.
+              Let&apos;s bring your ideas to life.
             </p>
 
             {/* CTA Buttons */}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 interface LogoProps {
     variant?: 'default' | 'minimal' | 'geometric';
@@ -54,9 +55,11 @@ const Logo: React.FC<LogoProps> = ({
     return (
         <div className={`${sizeClasses[size]} ${className} transition-transform duration-300 hover:scale-105`}>
             {!imageError ? (
-                <img
+                <Image
                     src={getLogoSrc()}
                     alt="Parth Sharma Logo"
+                    width={variant === 'default' ? 120 : 48}
+                    height={variant === 'default' ? 40 : 48}
                     className="w-full h-full"
                     onError={() => setImageError(true)}
                 />

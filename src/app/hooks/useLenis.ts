@@ -8,7 +8,7 @@ export const useLenis = () => {
 
     useEffect(() => {
         // Get the Lenis instance from the window object
-        const lenis = (window as any).lenis;
+        const lenis = (window as typeof window & { lenis?: Lenis }).lenis;
         if (lenis) {
             lenisRef.current = lenis;
         }
