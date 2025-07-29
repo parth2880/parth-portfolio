@@ -180,7 +180,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-fadeIn hover-lift" style={{ animationDelay: '2s' }}>
+        <div className="max-sm:hidden absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-fadeIn hover-lift" style={{ animationDelay: '2s' }}>
           <button
             onClick={() => {
               if (lenis) {
