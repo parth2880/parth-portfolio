@@ -5,14 +5,17 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import Logo from './Logo';
+import { useActiveSection } from '../hooks/useActiveSection';
 
 type NavItem = {
   label: string;
   href: string;
+  section: string;
 };
 
 const Header: React.FC = () => {
   const pathname = usePathname();
+  const activeSection = useActiveSection();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -42,12 +45,19 @@ const Header: React.FC = () => {
   };
 
   const navItems: NavItem[] = [
-    { label: 'Home', href: '/' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'About', href: '#about-me' },
-    { label: 'Contact', href: '#contacts' },
+    { label: 'Home', href: '/', section: 'home' },
+    { label: 'Projects', href: '#projects', section: 'projects' },
+    { label: 'Skills', href: '#skills', section: 'skills' },
+    { label: 'About', href: '#about-me', section: 'about-me' },
+    { label: 'Contact', href: '#contacts', section: 'contacts' },
   ];
+
+  const isActive = (item: NavItem) => {
+    if (item.section === 'home') {
+      return activeSection === 'home' || (pathname === '/' && !activeSection);
+    }
+    return activeSection === item.section;
+  };
 
   return (
     <header
@@ -65,20 +75,25 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`relative font-medium transition-colors text-sm lg:text-base ${pathname === item.href ? 'text-primary' : 'text-foreground hover:text-primary'
-                  }`}
-                onClick={handleLinkClick}
-              >
-                {item.label}
-                {pathname === item.href && (
-                  <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full" />
-                )}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const active = isActive(item);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`relative font-medium transition-colors text-sm lg:text-base ${active
+                    ? 'text-primary font-semibold'
+                    : 'text-foreground hover:text-primary'
+                    }`}
+                  onClick={handleLinkClick}
+                >
+                  {item.label}
+                  {active && (
+                    <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full" />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Theme Toggle & Mobile Menu */}
@@ -117,17 +132,22 @@ const Header: React.FC = () => {
         {isMobile && isMenuOpen && (
           <div className="md:hidden mt-3 sm:mt-4 pb-3 sm:pb-4 border-t border-border">
             <nav className="flex flex-col space-y-3 sm:space-y-4 pt-3 sm:pt-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`font-medium transition-colors text-sm sm:text-base ${pathname === item.href ? 'text-primary' : 'text-foreground hover:text-primary'
-                    }`}
-                  onClick={handleLinkClick}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const active = isActive(item);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`font-medium transition-colors text-sm sm:text-base ${active
+                      ? 'text-primary font-semibold'
+                      : 'text-foreground hover:text-primary'
+                      }`}
+                    onClick={handleLinkClick}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
         )}

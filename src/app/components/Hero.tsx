@@ -80,7 +80,7 @@ const Hero: React.FC = () => {
   ];
 
   return (
-    <section ref={heroRef} className="min-h-screen flex items-center justify-center py-12 sm:py-16 lg:py-20 relative overflow-hidden">
+    <section id="home" ref={heroRef} className="min-h-screen flex items-center justify-center py-12 sm:py-16 lg:py-20 relative overflow-hidden">
       {/* Mouse follower */}
       <div
         ref={mouseFollowerRef}
